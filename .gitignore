@@ -1,0 +1,19 @@
+
+# PyCharm
+.idea/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+
+# Environment variables
+.env
+
+# Other
+main.py
+nn_showcase/
+mnist_dataset/
