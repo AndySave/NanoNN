@@ -8,4 +8,4 @@ dynamic = ["version"]
 dependencies = ["numpy >= 1.26",]
 
 [tool.setuptools]
-py-modules = ["nano_nn",]
+packages = ["nano_nn",]
