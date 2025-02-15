@@ -23,11 +23,15 @@
   - Easily save and load trained models
 
 ## Installation
+To install NanoNN, simply run:
+```bash
+pip install git+https://github.com/AndySave/NanoNN.git
 ```
-git clone https://github.com/AndySave/NanoNN.git
-cd NanoNN
-pip install -r requirements.txt
-```
+
+Once installed you should be able to import the framework:
+```python
+import nano_nn
+````
 
 ## Usage
 
