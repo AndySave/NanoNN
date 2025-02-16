@@ -12,6 +12,7 @@ class Optimizer:
 
 class GradientDescent(Optimizer):
     def __init__(self):
+        self.type = 'GradientDescent'
         self.learning_rate = None
 
     def update_learning_rate(self, learning_rate):
@@ -24,6 +25,7 @@ class GradientDescent(Optimizer):
 
 class Adam(Optimizer):
     def __init__(self, beta1=0.9, beta2=0.999, epsilon=1e-8):
+        self.type = 'Adam'
         self.learning_rate = None
         self.beta1 = beta1
         self.beta2 = beta2

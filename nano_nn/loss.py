@@ -11,6 +11,9 @@ class Loss:
 
 
 class MeanSquaredError(Loss):
+    def __init__(self):
+        self.type = 'MeanSquaredError'
+
     def forward(self, predicted, target):
         self.predicted = predicted
         self.target = target.reshape(-1, 1)
@@ -21,6 +24,9 @@ class MeanSquaredError(Loss):
 
 
 class BinaryCrossEntropy(Loss):
+    def __init__(self):
+        self.type = 'BinaryCrossEntropy'
+
     def forward(self, predicted, target):
         self.predicted = np.clip(predicted, 1e-15, 1 - 1e-15)
         self.target = target.reshape(-1, 1)
@@ -32,6 +38,9 @@ class BinaryCrossEntropy(Loss):
 
 
 class CategoricalCrossEntropy(Loss):
+    def __init__(self):
+        self.type = 'CategoricalCrossEntropy'
+
     def forward(self, predicted, target):
         self.predicted = np.clip(predicted, 1e-15, 1 - 1e-15)
         self.target = target
@@ -40,3 +49,4 @@ class CategoricalCrossEntropy(Loss):
     def backward(self):
         grad = self.predicted - self.target
         return grad / self.target.shape[0]
+

@@ -11,6 +11,9 @@ class Activation:
 
 
 class ReLU(Activation):
+    def __init__(self):
+        self.type = 'ReLU'
+
     def forward(self, x):
         self.input = x
         return np.maximum(0, x)
@@ -21,6 +24,9 @@ class ReLU(Activation):
 
 
 class Sigmoid(Activation):
+    def __init__(self):
+        self.type = 'Sigmoid'
+
     def forward(self, x):
         x = np.clip(x, -500, 500)
         self.sigmoid_result = 1 / (1 + np.exp(-x))
@@ -32,6 +38,9 @@ class Sigmoid(Activation):
 
 
 class Softmax(Activation):
+    def __init__(self):
+        self.type = 'Softmax'
+
     def forward(self, x):
         exp_z = np.exp(x - np.max(x, axis=1, keepdims=True))
         self.softmax_result = exp_z / np.sum(exp_z, axis=1, keepdims=True)

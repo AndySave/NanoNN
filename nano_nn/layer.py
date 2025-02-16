@@ -12,6 +12,7 @@ class Layer:
 
 class Dense(Layer):
     def __init__(self, in_features, out_features):
+        self.type = 'Dense'
         limit = np.sqrt(6 / (in_features + out_features))
         self.W = np.random.uniform(low=-limit, high=limit, size=(in_features, out_features))
         self.b = np.zeros(out_features)
@@ -28,9 +29,16 @@ class Dense(Layer):
 
         return in_gradient
 
+    def get_weights(self):
+        return self.W
+
+    def get_bias(self):
+        return self.b
+
 
 class Dropout(Layer):
     def __init__(self, dropout_rate):
+        self.type = 'Dropout'
         self.dropout_rate = dropout_rate
         self.is_training = True
 

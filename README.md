@@ -108,6 +108,7 @@ even for a single data point. Example with only 1 instance:
 ```python
 x = np.array([5, 8, 1, 2, 6])  # Some random input vector
 x = x.reshape(1, -1)           # Reshape vector into matrix
+model.eval()                   # Ensure that the model is in eval mode
 output, _ = model.forward(x)   # Perform inference
 print("Predicted output:", output)
 ```
@@ -119,15 +120,7 @@ Once your model is trained, you can save it to a file and load it later for infe
 model.save_model(file_path="/path/to/save/model_file")
 ```
 
-When loading a model, ensure that you have defined the model architecture exactly as it was when saved. For example: 
+To load the model do: 
 ```python
-class Model(nn.Module):  # This definition must match the saved model.
-    def __init__(self):
-        super().__init__()
-        self.add(nn.Dense(10, 32))  
-        self.add(nn.ReLU())           
-        self.add(nn.Dense(32, 1))     
-        self.add(nn.Sigmoid())        
-
 model = nn.load_model(file_path="/path/to/load/model_file")
 ```

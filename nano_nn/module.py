@@ -35,10 +35,6 @@ class Module:
             if isinstance(layer, Dropout):
                 layer.is_training = False
 
-    def save_model(self, file_path):
-        with open(file_path, 'wb') as f:
-            pickle.dump(self, f)
-
     def forward(self, x, target=None):
         for layer in self.layers:
             x = layer.forward(x)
@@ -60,3 +56,22 @@ class Module:
             loss_gradient = layer.backward(loss_gradient)
             if hasattr(layer, 'W'):
                 self.optimizer.update(layer)
+
+    def save_model(self, file_path):
+        model_data = {'loss_fn': self.loss_fn.type, 'learning_rate': self.learning_rate, 'optimizer': self.optimizer.type}
+
+        layer_data = {}
+        for i, layer in enumerate(self.layers):
+            layer_type = layer.type
+            layer_data[f'layer_{i}'] = {'type': layer_type}
+
+            if hasattr(layer, 'get_weights'):
+                layer_data[f'layer_{i}']['weights'] = layer.get_weights()
+                layer_data[f'layer_{i}']['bias'] = layer.get_bias()
+            elif layer_type == 'Dropout':
+                layer_data[f'layer_{i}']['dropout_rate'] = layer.dropout_rate
+
+        model_data['layer_data'] = layer_data
+
+        with open(file_path, 'wb') as f:
+            pickle.dump(model_data, f)
