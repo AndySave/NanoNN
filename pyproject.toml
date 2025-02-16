@@ -9,3 +9,6 @@ dependencies = ["numpy >= 1.26",]
 
 [tool.setuptools]
 packages = ["nano_nn",]
+
+[tool.setuptools.dynamic]
+version = { attr = "nano_nn.__version__" }
